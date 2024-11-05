@@ -1,0 +1,15 @@
+#  Base Image Configuration
+FROM ubuntu:22.04
+
+# Nginx のインストール
+RUN apt -y update && apt -y upgrade 
+RUN apt -y install nginx
+
+#  ポート指定
+EXPOSE 80
+
+# Web コンテンツの配置
+ONBUILD ADD website.tar /var/www/html/
+
+# Nginx の実行
+CMD ["nginx", "-g", "daemon off;"]
